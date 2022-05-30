@@ -1,6 +1,5 @@
 from django.db import models
 from django.template.defaultfilters import slugify
-from django_resized import ResizedImageField
 from django.utils import timezone
 from uuid import uuid4
 from django.urls import reverse
@@ -42,11 +41,11 @@ class Image(models.Model):
     description = models.TextField(null=True, blank=True)
     altText = models.TextField(null=True, blank=True)
     hashtags = models.CharField(null=True, blank=True, max_length=300)
-
-    ##ImageFields
-    squareImage = ResizedImageField(size=[1000, 1000], crop=['middle', 'center'], default='default_square.jpg', upload_to='square')
-    landImage = ResizedImageField(size=[2878, 1618], crop=['middle', 'center'], default='default_land.jpg', upload_to='landscape')
-    tallImage = ResizedImageField(size=[1618, 2878], crop=['middle', 'center'], default='default_tall.jpg', upload_to='tall')
+    image = models.ImageField(upload_to = 'image/',null =True)
+    # ##ImageFields
+    # squareImage = ResizedImageField(size=[1000, 1000], crop=['middle', 'center'], default='default_square.jpg', upload_to='square')
+    # landImage = ResizedImageField(size=[2878, 1618], crop=['middle', 'center'], default='default_land.jpg', upload_to='landscape')
+    # tallImage = ResizedImageField(size=[1618, 2878], crop=['middle', 'center'], default='default_tall.jpg', upload_to='tall')
 
     ##Related Fiels
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.CASCADE)
